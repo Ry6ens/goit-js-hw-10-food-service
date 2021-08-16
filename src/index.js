@@ -1,3 +1,4 @@
+import { labelToName } from 'whatwg-encoding';
 import menu from './menu.json';
 import itemsTemplate from './templates/gallery-items.hbs';
 
@@ -15,10 +16,10 @@ const theme = {
   };
 
 themeButton.onclick = function() {
-    const themeChecked = document.getElementById('theme-switch-toggle')
+    let themeChecked = document.getElementById('theme-switch-toggle')
     if (themeChecked.getAttribute('checked')) {
-        themeChecked.getAttribute('checked', true)
-        page.classList.toggle(theme.LIGHT);
+        themeChecked.setAttribute('checked', true)
+        page.classList.toggle(theme.LIGHT)
         localStorage.setItem('theme', theme.LIGHT)
     } else {
         themeChecked.removeAttribute('checked')
@@ -26,3 +27,10 @@ themeButton.onclick = function() {
         localStorage.setItem('theme', theme.DARK)
     }  
   };
+
+document.addEventListener("DOMContentLoaded", function() {
+    if (localStorage.getItem('theme') === theme.LIGHT) {
+        themeChecked.setAttribute('checked', true)
+        document.body.classList.add(localStorage.getItem('theme'));
+        }
+  });
