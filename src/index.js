@@ -16,10 +16,12 @@ const theme = {
 
 themeButton.onclick = function() {
     const themeChecked = document.getElementById('theme-switch-toggle')
-    if (themeChecked.checked) {
+    if (themeChecked.getAttribute('checked')) {
+        themeChecked.getAttribute('checked', true)
         page.classList.toggle(theme.LIGHT);
         localStorage.setItem('theme', theme.LIGHT)
     } else {
+        themeChecked.removeAttribute('checked')
         page.classList.toggle(theme.DARK);
         localStorage.setItem('theme', theme.DARK)
     }  
