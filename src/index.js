@@ -9,28 +9,31 @@ galleryRef.insertAdjacentHTML('beforeend', markup);
 
 // Change color theme
 const page = document.querySelector('.page')
-const themeButton = document.querySelector('.theme-switch__toggle')
+const themeButton = document.querySelector('#theme-switch-toggle')
 const theme = {
     LIGHT: 'light-theme',
     DARK: 'dark-theme',
   };
 
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('theme') === theme.DARK) {
+        themeButton.setAttribute('checked', true)
+        page.classList.toggle(theme.DARK)
+        }
+})
+
 themeButton.onclick = function() {
-    let themeChecked = document.getElementById('theme-switch-toggle')
-    if (themeChecked.getAttribute('checked')) {
-        themeChecked.setAttribute('checked', true)
+    if (!themeButton.getAttribute('checked')) {
+        themeButton.setAttribute('checked', true)
+        localStorage.setItem('theme', theme.DARK)
+        page.classList.toggle(theme.DARK)
+    } else {
+        themeButton.removeAttribute('checked')
+        page.classList.toggle(theme.DARK)
         page.classList.toggle(theme.LIGHT)
         localStorage.setItem('theme', theme.LIGHT)
-    } else {
-        themeChecked.removeAttribute('checked')
-        page.classList.toggle(theme.DARK);
-        localStorage.setItem('theme', theme.DARK)
     }  
   };
 
-document.addEventListener("DOMContentLoaded", function() {
-    if (localStorage.getItem('theme') === theme.LIGHT) {
-        themeChecked.setAttribute('checked', true)
-        document.body.classList.add(localStorage.getItem('theme'));
-        }
-  });
+
+  
