@@ -27,9 +27,10 @@ themeButton.onclick = function() {
         themeButton.setAttribute('checked', true)
         localStorage.setItem('theme', theme.DARK)
         page.classList.toggle(theme.DARK)
+        page.classList.remove(theme.LIGHT)
     } else {
         themeButton.removeAttribute('checked')
-        page.classList.toggle(theme.DARK)
+        page.classList.remove(theme.DARK)
         page.classList.toggle(theme.LIGHT)
         localStorage.setItem('theme', theme.LIGHT)
     }  
